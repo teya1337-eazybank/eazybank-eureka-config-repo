@@ -1,0 +1,63 @@
+server:
+  port: ${SERVER_PORT}
+
+spring:
+  # DESC: This needs to be here and not at config-server-repo to work
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+
+eureka:
+  instance:
+    # DESC: Setting 'true' tells this service to register with eureka using its IP address instead of its hostname as obtained by the OS/DNS
+    # RECOMMENDED: Setting 'true' to 'prefer-ip-address' is the recommended approach.
+    # IMPORTANT NOTE: You should set to false if setting up a cluster (use hostname for cluster)
+    prefer-ip-address: false
+    hostname: ${EUREKA_INSTANCE_HOSTNAME}
+    statusPageUrl: http://${EUREKA_INSTANCE_HOSTNAME}:${SERVER_PORT}/actuator/info
+    healthCheckUrl: http://${EUREKA_INSTANCE_HOSTNAME}:${SERVER_PORT}/actuator/health
+
+  client:
+    # NOTE: Turn these settings "off" (to false) when you run Eureka locally in standalone mode (no cluster).
+    # REASON: If we only have a single Eureka server and not a cluster of Eureka servers, then don't attempt to register a eureka server with another eureka server
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      # DESC: Register this eureka server with other eureka servers at the specified urls
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+
+endpoints:
+  shutdown:
+    enabled: true
+
+# DESC: Actuator endpoint management
+management:
+  endpoints:
+    # DESC: Expose all web actuator endpoints
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    # DESC: Enables the "/actuator/shutdown" endpoint
+    shutdown:
+      enabled: true
+
+    # DESC: Enable us to probe "/actuator/health/liveness" & "/actuator/health/readiness" endpoints
+    health:
+      probes:
+        enabled: true
+
+  # DESC: Enable "/actuator/health/liveness" & "/actuator/health/readiness" endpoints
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+  # DESC: For enabling the "/actuator/info" endpoint
+  info:
+    env:
+      enabled: true
