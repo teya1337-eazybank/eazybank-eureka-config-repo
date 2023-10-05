@@ -16,8 +16,8 @@ eureka:
     # IMPORTANT NOTE: You should set to false if setting up a cluster (use hostname for cluster)
     prefer-ip-address: false
     hostname: ${EUREKA_INSTANCE_HOSTNAME}
-    statusPageUrl: http://${EUREKA_INSTANCE_HOSTNAME}:${SERVER_PORT}/actuator/info
-    healthCheckUrl: http://${EUREKA_INSTANCE_HOSTNAME}:${SERVER_PORT}/actuator/health
+    # statusPageUrl: http://${EUREKA_INSTANCE_HOSTNAME}:${SERVER_PORT}/actuator/info
+    # healthCheckUrl: http://${EUREKA_INSTANCE_HOSTNAME}:${SERVER_PORT}/actuator/health
 
   client:
     # NOTE: Turn these settings "off" (to false) when you run Eureka locally in standalone mode (no cluster).
