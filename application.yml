@@ -2,6 +2,9 @@ server:
   port: ${SERVER_PORT}
 
 spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME}
+
   # DESC: This needs to be here and not at config-server-repo to work
   rabbitmq:
     host: ${RABBITMQ_HOST}
