@@ -10,12 +10,13 @@ spring:
   application:
     name: ${SPRING_APPLICATION_NAME}
 
-  # DESC: This needs to be here and not at config-server-repo to work
-  rabbitmq:
-    host: ${RABBITMQ_HOST}
-    port: ${RABBITMQ_PORT}
-    username: ${RABBITMQ_USERNAME}
-    password: ${RABBITMQ_PASSWORD}
+  # DESC: For spring cloud bus and refreshing eureka configs with the config-server
+  # NOTE: rabbitmq is used to relay info to microservices that configs at the config-server have been updated
+  # rabbitmq:
+  #   host: ${RABBITMQ_HOST}
+  #   port: ${RABBITMQ_PORT}
+  #   username: ${RABBITMQ_USERNAME}
+  #   password: ${RABBITMQ_PASSWORD}
 
 eureka:
   instance:
